@@ -1,2 +1,2 @@
 # mrpdsleep
-Mendelian Randomisation - sleep vs PD (and progression)
+Mendelian Randomisation - sleep vs PD progression
