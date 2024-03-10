@@ -12,6 +12,7 @@ rscript_MR_pipeline_2_IEU_noIEU.R
 
 rscript_MR_results_summary.R
 - pipeline for forest plot generation
+- calculation of F-statistics
 
 rscript_retrieve_snp_rsid.R
 - pipeline to change chr:pos formatting to RSID for each variant
