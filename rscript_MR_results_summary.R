@@ -2,8 +2,8 @@
 ## ======================== Mendelian Randomisation ======================== ##
 ## ===================== collate all sleep vs PD results =================== ##
 
-library(phenoscanner)
-library(MendelianRandomization)
+#library(phenoscanner)
+#library(MendelianRandomization)
 library(ggplot2)
 library(RColorBrewer)
 library(gplots)
@@ -12,18 +12,17 @@ library(tidyverse)
 library(TwoSampleMR)
 library(ggpubr)
 library(progress)
-library(topGO)
-library(limma)
-library(org.Hs.eg.db)
-library(clusterProfiler)
-library(enrichplot)
-library(DOSE)
+#library(topGO)
+#library(limma)
+#library(org.Hs.eg.db)
+#library(clusterProfiler)
+#library(enrichplot)
+#library(DOSE)
 #library(gprofiler2)
 library(forester)
-.libPaths(c(.libPaths(), "~/Documents/myRlib/"))
+#.libPaths(c(.libPaths(), "~/Documents/myRlib/"))
 
-dir <- c("D://OneDrive/Research/6 PD Sleep/GWAS/")
-#dir <- c("/Users/macbook/OneDrive - The University of Sydney (Students)/Research/6 PD Sleep/GWAS/")
+dir <- c("/Users/mahiarmahjoub/OneDrive/Research/6 PD Sleep/GWAS/")
 setwd(dir)
 source("rscript_functions_manual_mranalysis.R")
 
@@ -565,7 +564,23 @@ het <- rbind(het, temp_het)
 # turn pval into boolean 
 het$pval <- het$pval < 0.05
 
+## -- F-statistics --------------------------------------------------------- ##
+# initialise dataframe 
+Fstat <- res_all[[1]]$iv[,c("SNP","beta.exposure","se.exposure")]
+Fstat$analysis <- names(res_all)[1]
+# loop to include beta_exp & se_exp for all IVs used in dataframe 
+for (i in 2:length(res_all)){
+  Fstat_temp <- res_all[[i]]$iv[,c("SNP","beta.exposure","se.exposure")]
+  Fstat_temp$analysis <- names(res_all)[i]
+  
+  Fstat <- rbind(Fstat, Fstat_temp)
+}
 
+# calculate F-statistic
+Fstat$F <- (Fstat$beta.exposure**2) / (Fstat$se.exposure**2)
+
+# write F-statistics into table 
+write.csv(Fstat, "instrumentalvariables_Fstat.csv",row.names = F)
 
 ## -- forest plot ---------------------------------------------------------- ##
 for (i in unique(mr_beta$exp)){
