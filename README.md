@@ -17,3 +17,6 @@ rscript_MR_results_summary.R
 rscript_retrieve_snp_rsid.R
 - pipeline to change chr:pos formatting to RSID for each variant
 - for Iwaki et al PD progression meta-GWAS study
+
+rscript_collider.R
+- perform collider bias analysis using SlopeHunter R package by Mahmoud et al
