@@ -20,3 +20,9 @@ rscript_retrieve_snp_rsid.R
 
 rscript_collider.R
 - perform collider bias analysis using SlopeHunter R package by Mahmoud et al
+
+res_XXX.RDS files
+- contains collation of MR and sensitivity analysis for each exp vs outcome combination
+- RDS files containing collider bias analysis from SlopeHunter are in res_colbias_XXX.RDS files
+
+Further data can be obtained on request.
